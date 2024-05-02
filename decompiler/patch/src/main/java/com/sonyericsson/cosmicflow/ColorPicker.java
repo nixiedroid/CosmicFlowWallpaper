@@ -18,6 +18,7 @@ public class ColorPicker implements SharedPreferences.OnSharedPreferenceChangeLi
     private float[][] mCurrentColor;
     private SharedPreferences preferences;
      public boolean isDarkMode = true;
+     public boolean bgBloomDisable = true;
      private Context ctx;
 
      public ColorPicker(final Context context) {
@@ -44,12 +45,7 @@ public class ColorPicker implements SharedPreferences.OnSharedPreferenceChangeLi
         } else {
             isDarkMode = preferences.getBoolean("alwaysDark",true);
         }
-
-        if (preferences.getBoolean("autoDark",true)){
-            isDarkMode = checkDarkMode();
-        } else {
-            isDarkMode = preferences.getBoolean("alwaysDark",true);
-        }
+        bgBloomDisable = preferences.getBoolean("bgBloomDisable", true);
 
     }
      private boolean validate(String s){

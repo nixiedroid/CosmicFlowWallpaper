@@ -100,7 +100,7 @@ B015CBEE9BF795462A1F2F983FEE1A1CBCF7965C4A0A68201C5E890960E88071 *src\main\res\d
 #sha256#src\main\res\raw\flow_fragment.glsl#1970.01.01@00.00:00
 B60963C54780D9B10C34E99A1EF3B7EA119113972C05D21AB6945D1DE4202F3E *src\main\res\raw\flow_fragment.glsl
 #sha256#src\main\res\xml\settings.xml#1970.01.01@00.00:00
-C01FCF4DC8D046446A98F00682C5C4F7EF61AD71D96E185518B2FBADFD2A5B5E *src\main\res\xml\settings.xml
+5A8B506A2FC46E6B16456F1505F29AD26EECC18ECA9E7EC5B596A766BEC86C06 *src\main\res\xml\settings.xml
 #sha256#src\main\res\raw\flow_vertex.glsl#1970.01.01@00.00:00
 91C76A34AB6BC7159216014A01B41A98D4ADEFFC4EF254B58E78AD7D9B61FA7F *src\main\res\raw\flow_vertex.glsl
 #sha256#src\main\res\values\arrays.xml#1970.01.01@00.00:00
@@ -114,7 +114,7 @@ E102CAEBD456872DC7D0405C7919A1463A0447E34FC114B033F7016A988A8F91 *src\main\res\x
 #sha256#src\main\java\com\sonyericsson\cosmicflow\ColorInfo.java#1970.01.01@00.00:00
 174F92E8A9D45905053E1A1C2BEAF688BD3F665706D28BC60E7E428602226EFE *src\main\java\com\sonyericsson\cosmicflow\ColorInfo.java
 #sha256#src\main\java\com\sonyericsson\cosmicflow\ColorPicker.java#1970.01.01@00.00:00
-616A6AF6697055289F937B8286AF50D96059CDEFA1C7C90EB6062A151B2C5D83 *src\main\java\com\sonyericsson\cosmicflow\ColorPicker.java
+99FC70BBA9F4870FC27C45F29099455D0FDEB781F7424E1176139B33829176C4 *src\main\java\com\sonyericsson\cosmicflow\ColorPicker.java
 #sha256#src\main\java\com\sonyericsson\cosmicflow\GLWallpaperService.java#1970.01.01@00.00:00
 9BCECE1B59EF27052CC485469D66C90D3924306A79A04EDAA9BF9D3AFED2A53F *src\main\java\com\sonyericsson\cosmicflow\GLWallpaperService.java
 #sha256#src\main\java\com\sonyericsson\cosmicflow\LiveWallpaper.java#1970.01.01@00.00:00
@@ -122,7 +122,7 @@ FFC4426BF1B4A4DDBF6515605237F4F2B4F2AF2B95511706D828E3A1433FE06F *src\main\java\
 #sha256#src\test\java\com\sonyericsson\cosmicflow\ExampleUnitTest.java#1970.01.01@00.00:00
 17C6291057FC2C6DC03E28AD26AF32854D7C6B5F06D053065C6EFAF2CE4A89BA *src\test\java\com\sonyericsson\cosmicflow\ExampleUnitTest.java
 #sha256#src\main\java\com\sonyericsson\cosmicflow\gl\FlowRenderer.java#1970.01.01@00.00:00
-9655B786101438D0CA244A3DD55FFE09B394742671B6FFED22A822E2B24E1183 *src\main\java\com\sonyericsson\cosmicflow\gl\FlowRenderer.java
+97C56F68D899649B3028C3EAA5446E182576EBF4FEB7FD581C58C62835D4CA7D *src\main\java\com\sonyericsson\cosmicflow\gl\FlowRenderer.java
 #sha256#src\main\java\com\sonyericsson\cosmicflow\gl\ShaderFactory.java#1970.01.01@00.00:00
 164DBAFC70D601194C36CED6AA5490F279F99876994A8E1E607DF90479068FD8 *src\main\java\com\sonyericsson\cosmicflow\gl\ShaderFactory.java
 #sha256#src\main\java\com\sonyericsson\cosmicflow\gl\ShaderProgram.java#1970.01.01@00.00:00

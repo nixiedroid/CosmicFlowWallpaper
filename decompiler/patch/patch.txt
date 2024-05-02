@@ -1,5 +1,5 @@
 diff '--context=1' --strip-trailing-cr -r app/src/main/AndroidManifest.xml new/src/main/AndroidManifest.xml
-*** app/src/main/AndroidManifest.xml	Thu May  2 11:36:19 2024
+*** app/src/main/AndroidManifest.xml	Thu May  2 12:39:45 2024
 --- new/src/main/AndroidManifest.xml	Thu May  2 02:05:23 2024
 ***************
 *** 1,5 ****
@@ -33,7 +33,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/AndroidManifest.xml new/s
       </application>
 --- 10,11 ----
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/ColorInfo.java new/src/main/java/com/sonyericsson/cosmicflow/ColorInfo.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/ColorInfo.java	Thu May  2 11:36:30 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/ColorInfo.java	Thu May  2 12:39:49 2024
 --- new/src/main/java/com/sonyericsson/cosmicflow/ColorInfo.java	Thu May  2 02:03:26 2024
 ***************
 *** 6,10 ****
@@ -109,7 +109,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 +     }
   }
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/LiveWallpaper.java new/src/main/java/com/sonyericsson/cosmicflow/LiveWallpaper.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/LiveWallpaper.java	Thu May  2 11:36:32 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/LiveWallpaper.java	Thu May  2 12:39:50 2024
 --- new/src/main/java/com/sonyericsson/cosmicflow/LiveWallpaper.java	Thu May  2 02:03:26 2024
 ***************
 *** 15,17 ****
@@ -208,8 +208,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
           }
 --- 192,193 ----
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java new/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java	Thu May  2 11:36:32 2024
---- new/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java	Thu May  2 02:03:27 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java	Thu May  2 12:39:51 2024
+--- new/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java	Thu May  2 12:39:02 2024
 ***************
 *** 11,13 ****
   import android.opengl.Matrix;
@@ -287,11 +287,24 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !            this.mBackgroundBitmap = Texture.decodeBitmap(this.mContext, R.drawable.bg_grey, null);
           }
 ***************
+*** 176,178 ****
+          GLES20.glClear(16640);
+!         this.renderBackground(this.mBackgroundProgram, this.mBackgroundTexture, this.mSquareVertexBufferObject);
+          this.renderFlow();
+--- 178,184 ----
+          GLES20.glClear(16640);
+!         if (this.mColorPicker.isDarkMode){
+!             if (!this.mColorPicker.bgBloomDisable) {
+!                 this.renderBackground(this.mBackgroundProgram, this.mBackgroundTexture, this.mSquareVertexBufferObject);
+!             }
+!         }
+          this.renderFlow();
+***************
 *** 343,345 ****
           GLES20.glEnable(32925);
 !         if (GLES20.glGetError() != 0) {}
           if (this.mViewportWidth <= this.mViewportHeight) {
---- 345,347 ----
+--- 349,351 ----
           GLES20.glEnable(32925);
 !         GLES20.glGetError();
           if (this.mViewportWidth <= this.mViewportHeight) {
@@ -302,7 +315,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 !         this.createTextures();
           this.createShaders();
---- 363,371 ----
+--- 367,375 ----
           GLES20.glDisable(3024);
 !         if(mColorPicker.isDarkMode){
 !             GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE);
@@ -391,7 +404,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !             // 
 !             throw new IllegalStateException("An error occurred while decompiling this method.");
           }
---- 426,436 ----
+--- 430,440 ----
           
 !         public synchronized void sleep(float sleepTime) {
 !                 if (sleepTime > 0f) {
@@ -404,7 +417,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !                 }
           }
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/MeshPrimitive.java new/src/main/java/com/sonyericsson/cosmicflow/gl/MeshPrimitive.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/MeshPrimitive.java	Thu May  2 11:36:32 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/MeshPrimitive.java	Thu May  2 12:39:51 2024
 --- new/src/main/java/com/sonyericsson/cosmicflow/gl/MeshPrimitive.java	Thu May  2 11:32:36 2024
 ***************
 *** 75,77 ****
@@ -470,7 +483,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !             floatBuffer.position(0);
               return floatBuffer;
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderFactory.java new/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderFactory.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderFactory.java	Thu May  2 11:36:32 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderFactory.java	Thu May  2 12:39:51 2024
 --- new/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderFactory.java	Thu May  2 02:03:27 2024
 ***************
 *** 21,321 ****
@@ -789,7 +802,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !        }
       }
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderProgram.java new/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderProgram.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderProgram.java	Thu May  2 11:36:32 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderProgram.java	Thu May  2 12:39:51 2024
 --- new/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderProgram.java	Thu May  2 02:03:27 2024
 ***************
 *** 73,76 ****
@@ -814,7 +827,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         if (value == null) {
               final int glGetUniformLocation = GLES20.glGetUniformLocation(this.mProgram, s);
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/Texture.java new/src/main/java/com/sonyericsson/cosmicflow/gl/Texture.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/Texture.java	Thu May  2 11:36:32 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/Texture.java	Thu May  2 12:39:51 2024
 --- new/src/main/java/com/sonyericsson/cosmicflow/gl/Texture.java	Thu May  2 02:03:27 2024
 ***************
 *** 8,10 ****
@@ -987,7 +1000,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         }
       }
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/VertexBufferObject.java new/src/main/java/com/sonyericsson/cosmicflow/gl/VertexBufferObject.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/VertexBufferObject.java	Thu May  2 11:36:33 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/VertexBufferObject.java	Thu May  2 12:39:51 2024
 --- new/src/main/java/com/sonyericsson/cosmicflow/gl/VertexBufferObject.java	Thu May  2 11:33:23 2024
 ***************
 *** 18,54 ****
@@ -1054,7 +1067,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         GLES20.glBufferData(34963, meshPrimitive.getIndexBufferSize(), meshPrimitive.getIndexBuffer(), 35044);
           FlowRenderer.checkGlError("VertexBufferObject glBufferData");
 diff '--context=1' --strip-trailing-cr -r app/src/main/res/raw/background_vertex.glsl new/src/main/res/raw/background_vertex.glsl
-*** app/src/main/res/raw/background_vertex.glsl	Thu May  2 11:36:20 2024
+*** app/src/main/res/raw/background_vertex.glsl	Thu May  2 12:39:45 2024
 --- new/src/main/res/raw/background_vertex.glsl	Thu May  2 02:03:27 2024
 ***************
 *** 19,24 ****
@@ -1081,7 +1094,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/res/raw/background_vertex
 +     u_ColorIndex = u_Time_HeightScale_Color_XOffset.z;
       gl_Position = vec4(1.0, u_HeightScale, 1.0, 1.0) * (vPosition + vec4(0.0, -0.2 * sin(vPosition.y + u_XOffset * 2.0 + u_Time + vPosition.x), 0.0, 0.0));
 diff '--context=1' --strip-trailing-cr -r app/src/main/res/raw/flow_vertex.glsl new/src/main/res/raw/flow_vertex.glsl
-*** app/src/main/res/raw/flow_vertex.glsl	Thu May  2 11:36:19 2024
+*** app/src/main/res/raw/flow_vertex.glsl	Thu May  2 12:39:45 2024
 --- new/src/main/res/raw/flow_vertex.glsl	Thu May  2 02:03:27 2024
 ***************
 *** 5,8 ****
@@ -1111,7 +1124,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/res/raw/flow_vertex.glsl 
 +     u_Time = u_Time_NoiseScale_Color.x;
       gl_Position = uMVPMatrix * addNoise0(aPosition) * NOISE_SCALE;
 diff '--context=1' --strip-trailing-cr -r app/src/main/res/values/colors.xml new/src/main/res/values/colors.xml
-*** app/src/main/res/values/colors.xml	Thu May  2 11:36:20 2024
+*** app/src/main/res/values/colors.xml	Thu May  2 12:39:45 2024
 --- new/src/main/res/values/colors.xml	Thu May  2 02:03:27 2024
 ***************
 *** 10,11 ****
@@ -1121,7 +1134,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/res/values/colors.xml new
 + 	<color name="primary">#669900</color>
   </resources>
 diff '--context=1' --strip-trailing-cr -r app/src/main/res/values/strings.xml new/src/main/res/values/strings.xml
-*** app/src/main/res/values/strings.xml	Thu May  2 11:36:20 2024
+*** app/src/main/res/values/strings.xml	Thu May  2 12:39:45 2024
 --- new/src/main/res/values/strings.xml	Thu May  2 02:03:27 2024
 ***************
 *** 5,6 ****
