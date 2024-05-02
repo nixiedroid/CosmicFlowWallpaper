@@ -37,12 +37,14 @@ goto :EOF
 
 :label_decomile_apk
 echo. Decompiling APK...
+if "%exitBeforeApplyingPatches%"=="true" goto label_skipCheck_1
 if exist "%working_dir%..\%output_dir%" (
 echo. apk file seems to be already decompiled
 echo. remove "%working_dir%..\%output_dir%" to continue
 pause
 goto :EOF
 )
+:label_skipCheck_1
 if exist "%working_dir%%output_dir%" (
 echo. apk file seems to be already decompiled
 echo. remove "%working_dir%%output_dir%" to continue
