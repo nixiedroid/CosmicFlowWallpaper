@@ -16,7 +16,7 @@ for %%F in (%cd%\*.apk) do (
  goto label_validate_signature
 )
 echo. *.apk file not found
-
+pause
 goto :EOF
 
 
