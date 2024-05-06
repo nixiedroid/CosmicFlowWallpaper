@@ -1,6 +1,6 @@
 diff '--context=1' --strip-trailing-cr -r app/src/main/AndroidManifest.xml new/src/main/AndroidManifest.xml
-*** app/src/main/AndroidManifest.xml	Thu May  2 12:39:45 2024
---- new/src/main/AndroidManifest.xml	Thu May  2 02:05:23 2024
+*** app/src/main/AndroidManifest.xml	Mon May  6 12:39:51 2024
+--- new/src/main/AndroidManifest.xml	Mon May  6 12:38:38 2024
 ***************
 *** 1,5 ****
 ! <?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.sonyericsson.cosmicflow">
@@ -33,8 +33,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/AndroidManifest.xml new/s
       </application>
 --- 10,11 ----
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/ColorInfo.java new/src/main/java/com/sonyericsson/cosmicflow/ColorInfo.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/ColorInfo.java	Thu May  2 12:39:49 2024
---- new/src/main/java/com/sonyericsson/cosmicflow/ColorInfo.java	Thu May  2 02:03:26 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/ColorInfo.java	Mon May  6 12:39:55 2024
+--- new/src/main/java/com/sonyericsson/cosmicflow/ColorInfo.java	Mon May  6 12:38:38 2024
 ***************
 *** 6,10 ****
   
@@ -75,7 +75,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 ***************
 *** 59,78 ****
       
--     public static ColorInfo mapAccentColor(final Context context, final int i) {
+-     public static ColorInfo mapAccentColor(final Context context, final int n) {
 -         synchronized (ColorInfo.class) {
 -             if (ColorInfo.sAccentToBuildInColorMap == null) {
 -                 ColorInfo.sAccentToBuildInColorMap = new HashMap<Integer, ColorInfo>();
@@ -89,7 +89,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 -                 ColorInfo.sAccentToBuildInColorMap.put(Integer.valueOf(resources.getColor(2131099654)), ColorInfo.Amethyst);
 -                 ColorInfo.sAccentToBuildInColorMap.put(Integer.valueOf(resources.getColor(2131099655)), ColorInfo.Amber);
 -             }
--             return ColorInfo.sAccentToBuildInColorMap.get(Integer.valueOf(i));
+-             return ColorInfo.sAccentToBuildInColorMap.get(Integer.valueOf(n));
 -         }
 -     }
 -     
@@ -109,8 +109,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 +     }
   }
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/LiveWallpaper.java new/src/main/java/com/sonyericsson/cosmicflow/LiveWallpaper.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/LiveWallpaper.java	Thu May  2 12:39:50 2024
---- new/src/main/java/com/sonyericsson/cosmicflow/LiveWallpaper.java	Thu May  2 02:03:26 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/LiveWallpaper.java	Mon May  6 12:39:56 2024
+--- new/src/main/java/com/sonyericsson/cosmicflow/LiveWallpaper.java	Mon May  6 12:38:38 2024
 ***************
 *** 15,17 ****
   import javax.microedition.khronos.egl.EGL10;
@@ -208,8 +208,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
           }
 --- 192,193 ----
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java new/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java	Thu May  2 12:39:51 2024
---- new/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java	Thu May  2 12:39:02 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java	Mon May  6 12:39:57 2024
+--- new/src/main/java/com/sonyericsson/cosmicflow/gl/FlowRenderer.java	Mon May  6 12:38:38 2024
 ***************
 *** 11,13 ****
   import android.opengl.Matrix;
@@ -232,6 +232,21 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
   
 ! public class FlowRenderer implements GLSurfaceView.Renderer
   {
+***************
+*** 105,110 ****
+      
+!     public static void checkGlError(final String s) {
+          final int glGetError = GLES20.glGetError();
+          if (glGetError != 0) {
+!             throw new RuntimeException(s + ": glError " + glGetError);
+          }
+--- 107,112 ----
+      
+!     public static void checkGlError(final String str) {
+          final int glGetError = GLES20.glGetError();
+          if (glGetError != 0) {
+!             throw new RuntimeException(str + ": glError " + glGetError);
+          }
 ***************
 *** 114,119 ****
           if (this.mFlowVertexShader == null) {
@@ -417,8 +432,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !                 }
           }
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/MeshPrimitive.java new/src/main/java/com/sonyericsson/cosmicflow/gl/MeshPrimitive.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/MeshPrimitive.java	Thu May  2 12:39:51 2024
---- new/src/main/java/com/sonyericsson/cosmicflow/gl/MeshPrimitive.java	Thu May  2 11:32:36 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/MeshPrimitive.java	Mon May  6 12:39:57 2024
+--- new/src/main/java/com/sonyericsson/cosmicflow/gl/MeshPrimitive.java	Mon May  6 12:38:38 2024
 ***************
 *** 75,77 ****
           public FlowMeshPrimitive(final short n) {
@@ -429,23 +444,71 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !             super(vertices(n), indices(n), null);
           }
 ***************
-*** 97,99 ****
-              shortBuffer.put(src);
-!             shortBuffer.position();
-              return shortBuffer;
---- 97,99 ----
-              shortBuffer.put(src);
-!             shortBuffer.position(0);
-              return shortBuffer;
+*** 81,83 ****
+              final short n3 = (short)((n - 1) * n2);
+!             final short[] array = new short[n3];
+              for (short n4 = 0; n4 < n - 1; ++n4) {
+--- 81,83 ----
+              final short n3 = (short)((n - 1) * n2);
+!             final short[] src = new short[n3];
+              for (short n4 = 0; n4 < n - 1; ++n4) {
 ***************
-*** 113,115 ****
-              floatBuffer.put(src);
-!             floatBuffer.position();
-              return floatBuffer;
---- 113,115 ----
-              floatBuffer.put(src);
-!             floatBuffer.position(0);
-              return floatBuffer;
+*** 86,98 ****
+                      final short n7 = (short)(n5 + 1);
+!                     array[n5] = (short)(n4 * n + n6);
+                      n5 = (short)(n7 + 1);
+!                     array[n7] = (short)((n4 + 1) * n + n6);
+                  }
+                  final short n8 = (short)(n5 + 1);
+!                 array[n5] = (short)((n4 + 1) * n + n - 1);
+                  final short n9 = (short)(n8 + 1);
+!                 array[n8] = (short)((n4 + 1) * n);
+              }
+              final ShortBuffer shortBuffer = ByteBuffer.allocateDirect(n3 * 2).order(ByteOrder.nativeOrder()).asShortBuffer();
+!             shortBuffer.put(array);
+              shortBuffer.position(0);
+--- 86,98 ----
+                      final short n7 = (short)(n5 + 1);
+!                     src[n5] = (short)(n4 * n + n6);
+                      n5 = (short)(n7 + 1);
+!                     src[n7] = (short)((n4 + 1) * n + n6);
+                  }
+                  final short n8 = (short)(n5 + 1);
+!                 src[n5] = (short)((n4 + 1) * n + n - 1);
+                  final short n9 = (short)(n8 + 1);
+!                 src[n8] = (short)((n4 + 1) * n);
+              }
+              final ShortBuffer shortBuffer = ByteBuffer.allocateDirect(n3 * 2).order(ByteOrder.nativeOrder()).asShortBuffer();
+!             shortBuffer.put(src);
+              shortBuffer.position(0);
+***************
+*** 103,110 ****
+              final int n2 = n * n;
+!             final float[] array = new float[n2 * 3];
+              for (int i = 0; i < n; ++i) {
+                  for (int n3 = i * n * 3, j = 0; j < n; ++j, n3 += 3) {
+!                     array[n3 + 0] = j * 1.0f / n;
+!                     array[n3 + 1] = i * 0.7f / n;
+!                     array[n3 + 2] = 0.0f;
+                  }
+--- 103,110 ----
+              final int n2 = n * n;
+!             final float[] src = new float[n2 * 3];
+              for (int i = 0; i < n; ++i) {
+                  for (int n3 = i * n * 3, j = 0; j < n; ++j, n3 += 3) {
+!                     src[n3 + 0] = j * 1.0f / n;
+!                     src[n3 + 1] = i * 0.7f / n;
+!                     src[n3 + 2] = 0.0f;
+                  }
+***************
+*** 112,114 ****
+              final FloatBuffer floatBuffer = ByteBuffer.allocateDirect(n2 * 3 * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
+!             floatBuffer.put(array);
+              floatBuffer.position(0);
+--- 112,114 ----
+              final FloatBuffer floatBuffer = ByteBuffer.allocateDirect(n2 * 3 * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
+!             floatBuffer.put(src);
+              floatBuffer.position(0);
 ***************
 *** 121,123 ****
           public SquareMeshPrimitive(final float n, final float n2) {
@@ -456,35 +519,73 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !             super(vertices(n, n2), indices(), texture());
           }
 ***************
-*** 135,137 ****
-              shortBuffer.put(src);
-!             shortBuffer.position();
-              return shortBuffer;
---- 135,137 ----
-              shortBuffer.put(src);
-!             shortBuffer.position(0);
-              return shortBuffer;
+*** 125,136 ****
+          private static ShortBuffer indices() {
+!             final short[] array2;
+!             final short[] array = array2 = new short[6];
+!             array2[0] = 0;
+!             array2[1] = 1;
+!             array2[2] = 2;
+!             array2[3] = 1;
+!             array2[4] = 2;
+!             array2[5] = 3;
+!             final ShortBuffer shortBuffer = ByteBuffer.allocateDirect(array.length * 2).order(ByteOrder.nativeOrder()).asShortBuffer();
+!             shortBuffer.put(array);
+              shortBuffer.position(0);
+--- 125,136 ----
+          private static ShortBuffer indices() {
+!             final short[] array;
+!             final short[] src = array = new short[6];
+!             array[0] = 0;
+!             array[1] = 1;
+!             array[2] = 2;
+!             array[3] = 1;
+!             array[4] = 2;
+!             array[5] = 3;
+!             final ShortBuffer shortBuffer = ByteBuffer.allocateDirect(src.length * 2).order(ByteOrder.nativeOrder()).asShortBuffer();
+!             shortBuffer.put(src);
+              shortBuffer.position(0);
 ***************
-*** 149,151 ****
-              floatBuffer.put(src);
-!             floatBuffer.position();
-              return floatBuffer;
---- 149,151 ----
-              floatBuffer.put(src);
-!             floatBuffer.position(0);
-              return floatBuffer;
+*** 140,150 ****
+          private static FloatBuffer texture() {
+!             final float[] array2;
+!             final float[] array = array2 = new float[8];
+!             array2[1] = (array2[0] = 0.0f);
+!             array2[2] = 1.0f;
+!             array2[4] = (array2[3] = 0.0f);
+!             array2[5] = 1.0f;
+!             array2[7] = (array2[6] = 1.0f);
+!             final FloatBuffer floatBuffer = ByteBuffer.allocateDirect(array.length * 3 * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
+!             floatBuffer.put(array);
+              floatBuffer.position(0);
+--- 140,150 ----
+          private static FloatBuffer texture() {
+!             final float[] array;
+!             final float[] src = array = new float[8];
+!             array[1] = (array[0] = 0.0f);
+!             array[2] = 1.0f;
+!             array[4] = (array[3] = 0.0f);
+!             array[5] = 1.0f;
+!             array[7] = (array[6] = 1.0f);
+!             final FloatBuffer floatBuffer = ByteBuffer.allocateDirect(src.length * 3 * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
+!             floatBuffer.put(src);
+              floatBuffer.position(0);
 ***************
-*** 157,159 ****
-              floatBuffer.put(src);
-!             floatBuffer.position();
-              return floatBuffer;
---- 157,159 ----
-              floatBuffer.put(src);
-!             floatBuffer.position(0);
-              return floatBuffer;
+*** 154,158 ****
+          private static FloatBuffer vertices(final float n, final float n2) {
+!             final float[] array = { -n, n2, 0.02f, n, n2, 0.02f, -n, -n2, 0.02f, n, -n2, 0.02f };
+!             final FloatBuffer floatBuffer = ByteBuffer.allocateDirect(array.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
+!             floatBuffer.put(array);
+              floatBuffer.position(0);
+--- 154,158 ----
+          private static FloatBuffer vertices(final float n, final float n2) {
+!             final float[] src = { -n, n2, 0.02f, n, n2, 0.02f, -n, -n2, 0.02f, n, -n2, 0.02f };
+!             final FloatBuffer floatBuffer = ByteBuffer.allocateDirect(src.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
+!             floatBuffer.put(src);
+              floatBuffer.position(0);
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderFactory.java new/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderFactory.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderFactory.java	Thu May  2 12:39:51 2024
---- new/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderFactory.java	Thu May  2 02:03:27 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderFactory.java	Mon May  6 12:39:57 2024
+--- new/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderFactory.java	Mon May  6 12:38:38 2024
 ***************
 *** 21,321 ****
       
@@ -541,7 +642,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         //    69: aload_1        
 !         //    70: astore          6
 !         //    72: new             Ljava/lang/RuntimeException;
-!         //    75: astore          8
+!         //    75: astore          7
 !         //    77: aload_1        
 !         //    78: astore          4
 !         //    80: aload_1        
@@ -551,7 +652,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         //    85: aload_1        
 !         //    86: astore          6
 !         //    88: new             Ljava/lang/StringBuilder;
-!         //    91: astore          7
+!         //    91: astore          8
 !         //    93: aload_1        
 !         //    94: astore          4
 !         //    96: aload_1        
@@ -560,7 +661,7 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         //    99: astore          5
 !         //   101: aload_1        
 !         //   102: astore          6
-!         //   104: aload           7
+!         //   104: aload           8
 !         //   106: invokespecial   java/lang/StringBuilder.<init>:()V
 !         //   109: aload_1        
 !         //   110: astore          4
@@ -570,8 +671,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         //   115: astore          5
 !         //   117: aload_1        
 !         //   118: astore          6
-!         //   120: aload           8
-!         //   122: aload           7
+!         //   120: aload           7
+!         //   122: aload           8
 !         //   124: ldc             "ShaderFactoryObject: Error loading resId="
 !         //   126: invokevirtual   java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
 !         //   129: iload_0        
@@ -590,35 +691,35 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         //   154: astore          5
 !         //   156: aload_1        
 !         //   157: astore          6
-!         //   159: aload           8
+!         //   159: aload           7
 !         //   161: athrow         
 !         //   162: astore          5
 !         //   164: aload           4
 !         //   166: astore_3       
 !         //   167: new             Ljava/lang/RuntimeException;
-!         //   170: astore          6
-!         //   172: aload           4
-!         //   174: astore_3       
-!         //   175: new             Ljava/lang/StringBuilder;
-!         //   178: astore_1       
+!         //   170: astore_1       
+!         //   171: aload           4
+!         //   173: astore_3       
+!         //   174: new             Ljava/lang/StringBuilder;
+!         //   177: astore          6
 !         //   179: aload           4
 !         //   181: astore_3       
-!         //   182: aload_1        
-!         //   183: invokespecial   java/lang/StringBuilder.<init>:()V
-!         //   186: aload           4
-!         //   188: astore_3       
-!         //   189: aload           6
-!         //   191: aload_1        
-!         //   192: ldc             "ShaderFactoryObject: Error loading resId="
-!         //   194: invokevirtual   java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-!         //   197: iload_0        
-!         //   198: invokevirtual   java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
-!         //   201: invokevirtual   java/lang/StringBuilder.toString:()Ljava/lang/String;
-!         //   204: aload           5
-!         //   206: invokespecial   java/lang/RuntimeException.<init>:(Ljava/lang/String;Ljava/lang/Throwable;)V
-!         //   209: aload           4
-!         //   211: astore_3       
-!         //   212: aload           6
+!         //   182: aload           6
+!         //   184: invokespecial   java/lang/StringBuilder.<init>:()V
+!         //   187: aload           4
+!         //   189: astore_3       
+!         //   190: aload_1        
+!         //   191: aload           6
+!         //   193: ldc             "ShaderFactoryObject: Error loading resId="
+!         //   195: invokevirtual   java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+!         //   198: iload_0        
+!         //   199: invokevirtual   java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+!         //   202: invokevirtual   java/lang/StringBuilder.toString:()Ljava/lang/String;
+!         //   205: aload           5
+!         //   207: invokespecial   java/lang/RuntimeException.<init>:(Ljava/lang/String;Ljava/lang/Throwable;)V
+!         //   210: aload           4
+!         //   212: astore_3       
+!         //   213: aload_1        
 !         //   214: athrow         
 !         //   215: astore_1       
 !         //   216: aload_3        
@@ -646,11 +747,11 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         //   253: invokevirtual   java/io/InputStream.close:()V
 !         //   256: aload           7
 !         //   258: areturn        
-!         //   259: astore          4
-!         //   261: aload           5
-!         //   263: astore_3       
-!         //   264: new             Ljava/lang/RuntimeException;
-!         //   267: astore_1       
+!         //   259: astore_1       
+!         //   260: aload           5
+!         //   262: astore_3       
+!         //   263: new             Ljava/lang/RuntimeException;
+!         //   266: astore          4
 !         //   268: aload           5
 !         //   270: astore_3       
 !         //   271: new             Ljava/lang/StringBuilder;
@@ -661,36 +762,36 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         //   281: invokespecial   java/lang/StringBuilder.<init>:()V
 !         //   284: aload           5
 !         //   286: astore_3       
-!         //   287: aload_1        
-!         //   288: aload           6
-!         //   290: ldc             "ShaderFactoryObject: Error loading resId="
-!         //   292: invokevirtual   java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-!         //   295: iload_0        
-!         //   296: invokevirtual   java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
-!         //   299: invokevirtual   java/lang/StringBuilder.toString:()Ljava/lang/String;
-!         //   302: aload           4
+!         //   287: aload           4
+!         //   289: aload           6
+!         //   291: ldc             "ShaderFactoryObject: Error loading resId="
+!         //   293: invokevirtual   java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+!         //   296: iload_0        
+!         //   297: invokevirtual   java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+!         //   300: invokevirtual   java/lang/StringBuilder.toString:()Ljava/lang/String;
+!         //   303: aload_1        
 !         //   304: invokespecial   java/lang/RuntimeException.<init>:(Ljava/lang/String;Ljava/lang/Throwable;)V
 !         //   307: aload           5
 !         //   309: astore_3       
-!         //   310: aload_1        
-!         //   311: athrow         
-!         //   312: astore          5
-!         //   314: aload           6
-!         //   316: astore_3       
-!         //   317: new             Ljava/lang/RuntimeException;
-!         //   320: astore_1       
-!         //   321: aload           6
-!         //   323: astore_3       
-!         //   324: new             Ljava/lang/StringBuilder;
-!         //   327: astore          4
-!         //   329: aload           6
-!         //   331: astore_3       
-!         //   332: aload           4
+!         //   310: aload           4
+!         //   312: athrow         
+!         //   313: astore          5
+!         //   315: aload           6
+!         //   317: astore_3       
+!         //   318: new             Ljava/lang/RuntimeException;
+!         //   321: astore          4
+!         //   323: aload           6
+!         //   325: astore_3       
+!         //   326: new             Ljava/lang/StringBuilder;
+!         //   329: astore_1       
+!         //   330: aload           6
+!         //   332: astore_3       
+!         //   333: aload_1        
 !         //   334: invokespecial   java/lang/StringBuilder.<init>:()V
 !         //   337: aload           6
 !         //   339: astore_3       
-!         //   340: aload_1        
-!         //   341: aload           4
+!         //   340: aload           4
+!         //   342: aload_1        
 !         //   343: ldc             "ShaderFactoryObject: Error loading resId="
 !         //   345: invokevirtual   java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
 !         //   348: iload_0        
@@ -700,69 +801,69 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         //   357: invokespecial   java/lang/RuntimeException.<init>:(Ljava/lang/String;Ljava/lang/Throwable;)V
 !         //   360: aload           6
 !         //   362: astore_3       
-!         //   363: aload_1        
-!         //   364: athrow         
-!         //   365: astore_1       
-!         //   366: goto            256
-!         //   369: astore_3       
-!         //   370: goto            224
+!         //   363: aload           4
+!         //   365: athrow         
+!         //   366: astore_1       
+!         //   367: goto            256
+!         //   370: astore_3       
+!         //   371: goto            224
 !         //    Exceptions:
 !         //  Try           Handler
 !         //  Start  End    Start  End    Type                                             
 !         //  -----  -----  -----  -----  -------------------------------------------------
 !         //  11     20     162    215    Landroid/content/res/Resources$NotFoundException;
-!         //  11     20     259    312    Ljava/io/IOException;
-!         //  11     20     312    365    Ljava/lang/RuntimeException;
+!         //  11     20     259    313    Ljava/io/IOException;
+!         //  11     20     313    366    Ljava/lang/RuntimeException;
 !         //  11     20     215    226    Any
 !         //  31     39     162    215    Landroid/content/res/Resources$NotFoundException;
-!         //  31     39     259    312    Ljava/io/IOException;
-!         //  31     39     312    365    Ljava/lang/RuntimeException;
+!         //  31     39     259    313    Ljava/io/IOException;
+!         //  31     39     313    366    Ljava/lang/RuntimeException;
 !         //  31     39     215    226    Any
 !         //  50     57     162    215    Landroid/content/res/Resources$NotFoundException;
-!         //  50     57     259    312    Ljava/io/IOException;
-!         //  50     57     312    365    Ljava/lang/RuntimeException;
+!         //  50     57     259    313    Ljava/io/IOException;
+!         //  50     57     313    366    Ljava/lang/RuntimeException;
 !         //  50     57     215    226    Any
 !         //  72     77     162    215    Landroid/content/res/Resources$NotFoundException;
-!         //  72     77     259    312    Ljava/io/IOException;
-!         //  72     77     312    365    Ljava/lang/RuntimeException;
+!         //  72     77     259    313    Ljava/io/IOException;
+!         //  72     77     313    366    Ljava/lang/RuntimeException;
 !         //  72     77     215    226    Any
 !         //  88     93     162    215    Landroid/content/res/Resources$NotFoundException;
-!         //  88     93     259    312    Ljava/io/IOException;
-!         //  88     93     312    365    Ljava/lang/RuntimeException;
+!         //  88     93     259    313    Ljava/io/IOException;
+!         //  88     93     313    366    Ljava/lang/RuntimeException;
 !         //  88     93     215    226    Any
 !         //  104    109    162    215    Landroid/content/res/Resources$NotFoundException;
-!         //  104    109    259    312    Ljava/io/IOException;
-!         //  104    109    312    365    Ljava/lang/RuntimeException;
+!         //  104    109    259    313    Ljava/io/IOException;
+!         //  104    109    313    366    Ljava/lang/RuntimeException;
 !         //  104    109    215    226    Any
 !         //  120    148    162    215    Landroid/content/res/Resources$NotFoundException;
-!         //  120    148    259    312    Ljava/io/IOException;
-!         //  120    148    312    365    Ljava/lang/RuntimeException;
+!         //  120    148    259    313    Ljava/io/IOException;
+!         //  120    148    313    366    Ljava/lang/RuntimeException;
 !         //  120    148    215    226    Any
 !         //  159    162    162    215    Landroid/content/res/Resources$NotFoundException;
-!         //  159    162    259    312    Ljava/io/IOException;
-!         //  159    162    312    365    Ljava/lang/RuntimeException;
+!         //  159    162    259    313    Ljava/io/IOException;
+!         //  159    162    313    366    Ljava/lang/RuntimeException;
 !         //  159    162    215    226    Any
-!         //  167    172    215    226    Any
-!         //  175    179    215    226    Any
-!         //  182    186    215    226    Any
-!         //  189    209    215    226    Any
-!         //  212    215    215    226    Any
-!         //  220    224    369    373    Ljava/io/IOException;
+!         //  167    171    215    226    Any
+!         //  174    179    215    226    Any
+!         //  182    187    215    226    Any
+!         //  190    210    215    226    Any
+!         //  213    215    215    226    Any
+!         //  220    224    370    374    Ljava/io/IOException;
 !         //  237    248    162    215    Landroid/content/res/Resources$NotFoundException;
-!         //  237    248    259    312    Ljava/io/IOException;
-!         //  237    248    312    365    Ljava/lang/RuntimeException;
+!         //  237    248    259    313    Ljava/io/IOException;
+!         //  237    248    313    366    Ljava/lang/RuntimeException;
 !         //  237    248    215    226    Any
-!         //  252    256    365    369    Ljava/io/IOException;
-!         //  264    268    215    226    Any
+!         //  252    256    366    370    Ljava/io/IOException;
+!         //  263    268    215    226    Any
 !         //  271    276    215    226    Any
 !         //  279    284    215    226    Any
 !         //  287    307    215    226    Any
-!         //  310    312    215    226    Any
-!         //  317    321    215    226    Any
-!         //  324    329    215    226    Any
-!         //  332    337    215    226    Any
+!         //  310    313    215    226    Any
+!         //  318    323    215    226    Any
+!         //  326    330    215    226    Any
+!         //  333    337    215    226    Any
 !         //  340    360    215    226    Any
-!         //  363    365    215    226    Any
+!         //  363    366    215    226    Any
 !         // 
 !         // The error that occurred was:
 !         // 
@@ -802,8 +903,37 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !        }
       }
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderProgram.java new/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderProgram.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderProgram.java	Thu May  2 12:39:51 2024
---- new/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderProgram.java	Thu May  2 02:03:27 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderProgram.java	Mon May  6 12:39:57 2024
+--- new/src/main/java/com/sonyericsson/cosmicflow/gl/ShaderProgram.java	Mon May  6 12:38:38 2024
+***************
+*** 41,44 ****
+      
+!     private static int loadShader(final int n, final String s) {
+!         if (s == null || s.length() <= 0) {
+              throw new RuntimeException("Could not create " + n + " shader. Invalid input");
+--- 41,44 ----
+      
+!     private static int loadShader(final int n, final String str) {
+!         if (str == null || str.length() <= 0) {
+              throw new RuntimeException("Could not create " + n + " shader. Invalid input");
+***************
+*** 50,52 ****
+          }
+!         GLES20.glShaderSource(glCreateShader, s);
+          GLES20.glCompileShader(glCreateShader);
+--- 50,52 ----
+          }
+!         GLES20.glShaderSource(glCreateShader, str);
+          GLES20.glCompileShader(glCreateShader);
+***************
+*** 56,58 ****
+              GLES20.glDeleteShader(glCreateShader);
+!             throw new RuntimeException("Could not compile shader: " + GLES20.glGetShaderInfoLog(glCreateShader) + "\n" + s);
+          }
+--- 56,58 ----
+              GLES20.glDeleteShader(glCreateShader);
+!             throw new RuntimeException("Could not compile shader: " + GLES20.glGetShaderInfoLog(glCreateShader) + "\n" + str);
+          }
 ***************
 *** 73,76 ****
       public int getAttributeHandle(final String s) {
@@ -827,8 +957,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         if (value == null) {
               final int glGetUniformLocation = GLES20.glGetUniformLocation(this.mProgram, s);
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/Texture.java new/src/main/java/com/sonyericsson/cosmicflow/gl/Texture.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/Texture.java	Thu May  2 12:39:51 2024
---- new/src/main/java/com/sonyericsson/cosmicflow/gl/Texture.java	Thu May  2 02:03:27 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/Texture.java	Mon May  6 12:39:57 2024
+--- new/src/main/java/com/sonyericsson/cosmicflow/gl/Texture.java	Mon May  6 12:38:38 2024
 ***************
 *** 8,10 ****
   import android.graphics.Bitmap;
@@ -840,7 +970,35 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 ! import java.io.InputStream;
   import android.content.Context;
 ***************
-*** 39,181 ****
+*** 18,24 ****
+      
+!     private Texture(final int mId) {
+!         if (mId == 0) {
+!             throw new IllegalArgumentException("id=" + mId);
+          }
+!         this.mId = mId;
+      }
+--- 19,25 ----
+      
+!     private Texture(final int n) {
+!         if (n == 0) {
+!             throw new IllegalArgumentException("id=" + n);
+          }
+!         this.mId = n;
+      }
+***************
+*** 27,30 ****
+          final ByteBuffer allocate = ByteBuffer.allocate(n * n2 * 4);
+!         allocate.limit(allocate.capacity());
+!         allocate.position(0);
+          final int[] array = { 0 };
+--- 28,31 ----
+          final ByteBuffer allocate = ByteBuffer.allocate(n * n2 * 4);
+!         allocate.limit();
+!         allocate.position();
+          final int[] array = { 0 };
+***************
+*** 39,178 ****
       
 !     public static Bitmap decodeBitmap(final Context p0, final int p1, final BitmapFactory$Options p2) {
 !         // 
@@ -897,33 +1055,33 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         //    70: aload_2        
 !         //    71: astore_3       
 !         //    72: goto            40
-!         //    75: astore_0       
+!         //    75: astore_2       
 !         //    76: aload           4
 !         //    78: astore_3       
 !         //    79: new             Ljava/lang/RuntimeException;
-!         //    82: astore          5
-!         //    84: aload           4
-!         //    86: astore_3       
-!         //    87: new             Ljava/lang/StringBuilder;
-!         //    90: astore_2       
+!         //    82: astore_0       
+!         //    83: aload           4
+!         //    85: astore_3       
+!         //    86: new             Ljava/lang/StringBuilder;
+!         //    89: astore          5
 !         //    91: aload           4
 !         //    93: astore_3       
-!         //    94: aload_2        
-!         //    95: invokespecial   java/lang/StringBuilder.<init>:()V
-!         //    98: aload           4
-!         //   100: astore_3       
-!         //   101: aload           5
-!         //   103: aload_2        
-!         //   104: ldc             "Error loading resource   source="
-!         //   106: invokevirtual   java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-!         //   109: iload_1        
-!         //   110: invokevirtual   java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
-!         //   113: invokevirtual   java/lang/StringBuilder.toString:()Ljava/lang/String;
-!         //   116: aload_0        
-!         //   117: invokespecial   java/lang/RuntimeException.<init>:(Ljava/lang/String;Ljava/lang/Throwable;)V
-!         //   120: aload           4
-!         //   122: astore_3       
-!         //   123: aload           5
+!         //    94: aload           5
+!         //    96: invokespecial   java/lang/StringBuilder.<init>:()V
+!         //    99: aload           4
+!         //   101: astore_3       
+!         //   102: aload_0        
+!         //   103: aload           5
+!         //   105: ldc             "Error loading resource   source="
+!         //   107: invokevirtual   java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+!         //   110: iload_1        
+!         //   111: invokevirtual   java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+!         //   114: invokevirtual   java/lang/StringBuilder.toString:()Ljava/lang/String;
+!         //   117: aload_2        
+!         //   118: invokespecial   java/lang/RuntimeException.<init>:(Ljava/lang/String;Ljava/lang/Throwable;)V
+!         //   121: aload           4
+!         //   123: astore_3       
+!         //   124: aload_0        
 !         //   125: athrow         
 !         //   126: astore_0       
 !         //   127: aload_3        
@@ -950,21 +1108,18 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         //  47     54     75     126    Ljava/lang/RuntimeException;
 !         //  47     54     126    137    Any
 !         //  60     64     69     75     Ljava/io/IOException;
-!         //  79     84     126    137    Any
-!         //  87     91     126    137    Any
-!         //  94     98     126    137    Any
-!         //  101    120    126    137    Any
-!         //  123    126    126    137    Any
+!         //  79     83     126    137    Any
+!         //  86     91     126    137    Any
+!         //  94     99     126    137    Any
+!         //  102    121    126    137    Any
+!         //  124    126    126    137    Any
 !         //  131    135    143    147    Ljava/io/IOException;
 !         // 
 !         // The error that occurred was:
 !         // 
-!         // java.lang.IndexOutOfBoundsException: Index 91 out of bounds for length 91
-!         //     at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:100)
-!         //     at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:106)
-!         //     at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:302)
-!         //     at java.base/java.util.Objects.checkIndex(Objects.java:385)
-!         //     at java.base/java.util.ArrayList.get(ArrayList.java:427)
+!         // java.lang.IndexOutOfBoundsException: Index: 91, Size: 91
+!         //     at java.util.ArrayList.rangeCheck(Unknown Source)
+!         //     at java.util.ArrayList.get(Unknown Source)
 !         //     at com.strobel.decompiler.ast.AstBuilder.convertToAst(AstBuilder.java:3362)
 !         //     at com.strobel.decompiler.ast.AstBuilder.build(AstBuilder.java:112)
 !         //     at com.strobel.decompiler.languages.java.ast.AstMethodBodyBuilder.createMethodBody(AstMethodBodyBuilder.java:203)
@@ -1000,8 +1155,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         }
       }
 diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cosmicflow/gl/VertexBufferObject.java new/src/main/java/com/sonyericsson/cosmicflow/gl/VertexBufferObject.java
-*** app/src/main/java/com/sonyericsson/cosmicflow/gl/VertexBufferObject.java	Thu May  2 12:39:51 2024
---- new/src/main/java/com/sonyericsson/cosmicflow/gl/VertexBufferObject.java	Thu May  2 11:33:23 2024
+*** app/src/main/java/com/sonyericsson/cosmicflow/gl/VertexBufferObject.java	Mon May  6 12:39:57 2024
+--- new/src/main/java/com/sonyericsson/cosmicflow/gl/VertexBufferObject.java	Mon May  6 12:38:38 2024
 ***************
 *** 18,54 ****
       public VertexBufferObject(final MeshPrimitive meshPrimitive) {
@@ -1028,8 +1183,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !                     this.mTextureBuffer = null;
 !                     continue;
 !                 }
-!                 catch (final RuntimeException obj) {
-!                     throw new RuntimeException("VertexBufferObject: One or both buffers did not become generated!\n" + obj);
+!                 catch (final RuntimeException ex) {
+!                     throw new RuntimeException("VertexBufferObject: One or both buffers did not become generated!\n" + ex);
 !                 }
 !                 break;
               }
@@ -1067,8 +1222,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/java/com/sonyericsson/cos
 !         GLES20.glBufferData(34963, meshPrimitive.getIndexBufferSize(), meshPrimitive.getIndexBuffer(), 35044);
           FlowRenderer.checkGlError("VertexBufferObject glBufferData");
 diff '--context=1' --strip-trailing-cr -r app/src/main/res/raw/background_vertex.glsl new/src/main/res/raw/background_vertex.glsl
-*** app/src/main/res/raw/background_vertex.glsl	Thu May  2 12:39:45 2024
---- new/src/main/res/raw/background_vertex.glsl	Thu May  2 02:03:27 2024
+*** app/src/main/res/raw/background_vertex.glsl	Mon May  6 12:39:51 2024
+--- new/src/main/res/raw/background_vertex.glsl	Mon May  6 12:38:38 2024
 ***************
 *** 19,24 ****
   
@@ -1094,8 +1249,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/res/raw/background_vertex
 +     u_ColorIndex = u_Time_HeightScale_Color_XOffset.z;
       gl_Position = vec4(1.0, u_HeightScale, 1.0, 1.0) * (vPosition + vec4(0.0, -0.2 * sin(vPosition.y + u_XOffset * 2.0 + u_Time + vPosition.x), 0.0, 0.0));
 diff '--context=1' --strip-trailing-cr -r app/src/main/res/raw/flow_vertex.glsl new/src/main/res/raw/flow_vertex.glsl
-*** app/src/main/res/raw/flow_vertex.glsl	Thu May  2 12:39:45 2024
---- new/src/main/res/raw/flow_vertex.glsl	Thu May  2 02:03:27 2024
+*** app/src/main/res/raw/flow_vertex.glsl	Mon May  6 12:39:51 2024
+--- new/src/main/res/raw/flow_vertex.glsl	Mon May  6 12:38:38 2024
 ***************
 *** 5,8 ****
   uniform vec3 u_Time_NoiseScale_Color;
@@ -1124,8 +1279,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/res/raw/flow_vertex.glsl 
 +     u_Time = u_Time_NoiseScale_Color.x;
       gl_Position = uMVPMatrix * addNoise0(aPosition) * NOISE_SCALE;
 diff '--context=1' --strip-trailing-cr -r app/src/main/res/values/colors.xml new/src/main/res/values/colors.xml
-*** app/src/main/res/values/colors.xml	Thu May  2 12:39:45 2024
---- new/src/main/res/values/colors.xml	Thu May  2 02:03:27 2024
+*** app/src/main/res/values/colors.xml	Mon May  6 12:39:51 2024
+--- new/src/main/res/values/colors.xml	Mon May  6 12:38:38 2024
 ***************
 *** 10,11 ****
 --- 10,13 ----
@@ -1134,8 +1289,8 @@ diff '--context=1' --strip-trailing-cr -r app/src/main/res/values/colors.xml new
 + 	<color name="primary">#669900</color>
   </resources>
 diff '--context=1' --strip-trailing-cr -r app/src/main/res/values/strings.xml new/src/main/res/values/strings.xml
-*** app/src/main/res/values/strings.xml	Thu May  2 12:39:45 2024
---- new/src/main/res/values/strings.xml	Thu May  2 02:03:27 2024
+*** app/src/main/res/values/strings.xml	Mon May  6 12:39:51 2024
+--- new/src/main/res/values/strings.xml	Mon May  6 12:38:38 2024
 ***************
 *** 5,6 ****
 --- 5,19 ----
