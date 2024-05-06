@@ -23,14 +23,14 @@ goto :EOF
 :: validate signature of apk file
 :label_validate_signature
 echo. Validating signature...
-for /f %%F in ('certutil -hashfile !apk_file_path! SHA1 ^| find /I /V ".apk" ^| find /I /V "CertUtil"') do (
+for /f %%F in ('"%working_dir%bin\md5 -n !apk_file_path!"') do (
 set apk_hash=%%F
 )
-if "!apk_hash!"=="1a0f06d4b29303e70212fc453af0804e0f8ca8a3" (
+if "!apk_hash!"=="CCA75A823CE69193E52E8E031742BAE3" (
 goto label_decomile_apk
 ) 
 echo. invalid apk file. 
-echo. Required apk with MD5: 1a0f06d4b29303e70212fc453af0804e0f8ca8a3 
+echo. Required apk with MD5: CCA75A823CE69193E52E8E031742BAE3 
 pause
 goto :EOF
 
