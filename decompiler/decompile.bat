@@ -70,7 +70,7 @@ goto :EOF
 
 :label_decompile_jar
 pushd "%working_dir%%output_dir%"
-call procyon -fsb -ec -ss -jar "classes.jar" -o "%working_dir%%output_dir%\java"
+call "%working_dir%bin\procyon" -fsb -ec -ss -jar "classes.jar" -o "%working_dir%%output_dir%\java"
 popd
 goto :label_shrink_sources
 goto :EOF
