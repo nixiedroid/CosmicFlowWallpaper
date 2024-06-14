@@ -33,10 +33,10 @@
             android:key="primaryColor"
             android:title="@string/customPrimaryColorName"
             android:summary="@string/customColorDescName"
-            android:hint="#000000"/>
+            android:hint="000000"/>
     <EditTextPreference
             android:key="accentColor"
             android:title="@string/customAccentColorName"
             android:summary="@string/customColorDescName"
-            android:hint="#FACE8A"/>
+            android:hint="FACE8A"/>
 </PreferenceScreen>
