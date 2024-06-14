@@ -1,2 +1,2 @@
 system/app/CosmicFlow.apk
-![Xperia S screenshot|100](images/xperia_s.png)
+![Xperia S screenshot](images/xperia_s.png)
